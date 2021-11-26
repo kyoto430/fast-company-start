@@ -5,6 +5,8 @@ import userService from "../services/user.service";
 import { toast } from "react-toastify";
 import { setTokens } from "../services/localStorage.service";
 
+const REACT_APP_FIREBASE_KEY = "AIzaSyCMa4BQnrF_NkJw11JQGLumSYSRna-vEC4";
+
 const httpAuth = axios.create();
 const AuthContext = React.createContext();
 
@@ -17,7 +19,7 @@ const AuthProvider = ({ children }) => {
     const [error, setError] = useState(null);
 
     async function signUp({ email, password, ...rest }) {
-        const url = `https://identitytoolkit.googleapis.com/v1/accounts:signUp?key=${process.env.REACT_APP_FIREBASE_KEY}`;
+        const url = `https://identitytoolkit.googleapis.com/v1/accounts:signUp?key=${REACT_APP_FIREBASE_KEY}`;
         try {
             const { data } = await httpAuth.post(url, {
                 email,
@@ -41,7 +43,7 @@ const AuthProvider = ({ children }) => {
     }
     async function logIn({ email, password }) {
         try {
-            const url = `https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword?key=${process.env.REACT_APP_FIREBASE_KEY}`;
+            const url = `https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword?key=${REACT_APP_FIREBASE_KEY}`;
             const { data } = await httpAuth.post(url, {
                 email,
                 password,
